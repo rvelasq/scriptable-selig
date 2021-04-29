@@ -60,7 +60,7 @@ After tapping `Allow` and you will be prompted to `Open in Scriptable`. This wil
 
 ![dialog asking to open scriptable](docs/img/10-redirect.png)
 
-Read for use. You are now logged-in and your Reddit app is ready for use. 
+Ready for use. You are now logged-in and your Reddit app is ready for use. 
 
 ![dialog showing user is logged-in](docs/img/11-ready.png).
 
@@ -137,7 +137,7 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 ---
 
 * [selig-widget-sample](examples/selig-widget-sample.js) - widget that displays the current account's karma.
-* [selig-submit-image-example](examples/selig-submit-image-example.js) - sript to submit an image
+* [selig-submit-image-example](examples/selig-submit-image-example.js) - script to submit an image
 
 
 ## Roadmap
