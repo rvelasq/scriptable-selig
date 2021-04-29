@@ -60,7 +60,7 @@ After tapping `Allow` and you will be prompted to `Open in Scriptable`. This wil
 
 ![dialog asking to open scriptable](docs/img/10-redirect.png)
 
-Read for use. You are now logged-in and your Reddit app is ready for use. 
+Ready for use. You are now logged-in and your Reddit app is ready for use. 
 
 ![dialog showing user is logged-in](docs/img/11-ready.png).
 
