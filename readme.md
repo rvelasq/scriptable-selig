@@ -137,7 +137,7 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 ---
 
 * [selig-widget-sample](examples/selig-widget-sample.js) - widget that displays the current account's karma.
-* [selig-submit-image-example](examples/selig-submit-image-example.js) - sript to submit an image
+* [selig-submit-image-example](examples/selig-submit-image-example.js) - script to submit an image
 
 
 ## Roadmap
