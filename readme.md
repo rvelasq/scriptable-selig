@@ -75,7 +75,7 @@ To test if you have succesfully completed the setup, there are 2 menu items that
 1. `Who am I?` shows your username and karma.
 2. `Post Self Text` allows you to submit a post to any of your subscribed subreddits.
 
-Go ahead and try them. If you have multiple Reddit account, you can tap `Authenticate` again to login with the other account. You can then switch between accounts using `Switch Account`.
+Go ahead and try them. If you have multiple Reddit accounts, you can tap `Authenticate` again to login with the other account. You can then switch between accounts using `Switch Account`.
 
 If you're having trouble using those, try using `Reset` and start over. You can skip the Reddit app creation part and re-use the same `client_id` and `client_secret`.
 
@@ -131,6 +131,10 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 * `async postGallery({sr, title, imagePaths, nsfw=false, sendreplies=true, resubmit=false, spoiler=false})` - sumit multiple images
 * `.stashImage(imageObject, type)` - saves a image into temporary storage and returns path full path. `imageObject` must be an `Image` data type. `type` is either `jpeg` or `png`, `jpeg` is default if not provided.
 * `.unstashImages(imagePaths)` - accepts an array of filePaths that will be deleted.
+* `async inbox(after, limit)` - returns the active account's inbox messages
+* `async deleteMessage(id)` - deletes the message indicated by `id` from the account's inbox
+* `async makeFavorite(sr_name)` - mark a subreddit as a favorite
+
 
 
 ## Examples
@@ -145,11 +149,13 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 
 The plan is to add as mant API endpoints as possible but the following are the current items in priority.
 
-* Logout
-* Subreddit's list
-* Commenting
-* Deleting Posts/Comments
-* Mark/Unmark NSFW
+- [ ] Logout
+- [x] Subreddit's list
+- [ ] Commenting
+- [ ] Deleting Posts/Comments
+- [ ] Mark/Unmark NSFW
+- [x] Inbox Messages, read/delete
+- [x] Mark subreddit as favorite
 
 
 ![](https://lynks.cc/gh-selig/track)
