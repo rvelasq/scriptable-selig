@@ -134,7 +134,8 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 * `async inbox(after, limit)` - returns the active account's inbox messages
 * `async deleteMessage(id)` - deletes the message indicated by `id` from the account's inbox
 * `async makeFavorite(sr_name)` - mark a subreddit as a favorite
-
+* `async getMyOverview({username, after, before, sort, limit })` - get the user's post/comment history. paramters are optional. if `username` is not provided, it will use the current logged-in user's username.
+* `async updatePost(thing_id, text)` - update the contents of a post/comment 
 
 
 ## Examples

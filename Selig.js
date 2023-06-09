@@ -5,10 +5,15 @@
 /* **********************************************
 Selig - Reddit API Wrapper for Scriptable
 author : github.com/supermamon
-version: 1.1.0
+version: 1.2.0
 created: 29 Apr 2021
 about  : github.com/supermamon/scriptable-selig
 changelog: --------------------------------------
+  v1.2.0 | 2023-06-09
+  - feat: getMyOverview method to list post and
+          comment history
+  - feat: updatePost method to update post or
+          comment text
   v1.1.0 | 2023-04-16
   - fix: cokkies loading incorrectly
   - feat: inbox messages - read/delete
@@ -530,7 +535,7 @@ class Selig {
   }
 
   // --------------------------------------------
-  async _get({ endpoint, cookies = "", headers = {} }) {
+  async _get({ endpoint, cookies = "", headers = {}, fullurl = '' }) {
     log(`::_get(${endpoint})`)
 
     //var endpoint = path
@@ -548,7 +553,7 @@ class Selig {
       // additional headers
       Object.assign(hdrs, headers)
       var resp = await Utl.request({
-        url: `https://oauth.reddit.com/${endpoint}`,
+        url: (fullurl || `https://oauth.reddit.com/${endpoint}`),
         headers: hdrs,
         cookies: cookies
       })
@@ -581,6 +586,9 @@ class Selig {
       form: form ? Utl.jsonToUri(form) : data ? Utl.jsonToUri(data) : "",
       json: json
     })
+
+    //console.warn(resp.body)
+
     //await presentAlert(resp)
     return JSON.parse(resp.body)
 
@@ -812,12 +820,12 @@ class Selig {
   }
 
 
-  async makeFavorite(sr_name, make_favorite=true) {
+  async makeFavorite(sr_name, make_favorite = true) {
     log('::makeFavorite')
     try {
       let path = `api/favorite?raw_json=1`
       var form = { make_favorite, sr_name, api_type: 'json' }
-      return await this._post({ path, form})
+      return await this._post({ path, form })
     } catch (e) {
       throw new Error(e.message)
     }
@@ -930,6 +938,39 @@ class Selig {
     }))
 
   }
+
+  async getMyOverview({ username = '', after = '', before = '', sort = 'new', limit = 25 } = {}) {
+    log('::getMyComments()')
+    try {
+
+      if (!username) {
+        let me = await this.me()
+        username = me.name
+      }
+
+
+      //let cookies = await this._getCookies()
+      let endpoint = `/user/${username}/overview?after=${after}&before=${before}&sort=${sort}&limit=${limit}`
+      var resp = await this._get({ endpoint: endpoint })
+      return JSON.parse(resp.body).data
+    } catch (e) {
+      throw new Error(e.message)
+    }
+
+  }
+
+  async updatePost(thing_id, text) {
+    try {
+      let endpoint = `api/editusertext`
+      var form = { thing_id, text }
+      return await this._post({ path: endpoint, form: form })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+
+  }
+
+
 
 }
 
