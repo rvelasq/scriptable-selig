@@ -530,6 +530,7 @@ class Selig {
     var usrpath = path.join(this.home, `usr.${user.name}.json`)
     await writeFile(usrpath, token)
 
+    this.currentUser = user.name
     return token
 
   }
@@ -816,6 +817,7 @@ class Selig {
     var dest = path.join(this.cache, 'usr.current.json')
 
     await copyFile(src, dest)
+    this.currentUser = username
     return username
   }
 
@@ -940,16 +942,13 @@ class Selig {
   }
 
   async getMyOverview({ username = '', after = '', before = '', sort = 'new', limit = 25 } = {}) {
-    log('::getMyComments()')
+    log('::getMyOverview()')
     try {
 
       if (!username) {
         let me = await this.me()
         username = me.name
       }
-
-
-      //let cookies = await this._getCookies()
       let endpoint = `/user/${username}/overview?after=${after}&before=${before}&sort=${sort}&limit=${limit}`
       var resp = await this._get({ endpoint: endpoint })
       return JSON.parse(resp.body).data
@@ -958,6 +957,59 @@ class Selig {
     }
 
   }
+
+  async getUserComments({ username = '', after = '', before = '', sort = 'new', limit = 25 } = {}) {
+    log('::getUserComments()')
+    try {
+
+      if (!username) {
+        let me = await this.me()
+        username = me.name
+      }
+      let endpoint = `/user/${username}/comments?after=${after}&before=${before}&sort=${sort}&limit=${limit}`
+      var resp = await this._get({ endpoint: endpoint })
+      return JSON.parse(resp.body).data
+    } catch (e) {
+      throw new Error(e.message)
+    }
+
+  }
+
+  async getUserPosts({ username = '', after = '', before = '', sort = 'new', limit = 25 } = {}) {
+    log('::getUserPosts()')
+    try {
+
+      if (!username) {
+        let me = await this.me()
+        username = me.name
+      }
+      let endpoint = `/user/${username}/submitted?after=${after}&before=${before}&sort=${sort}&limit=${limit}`
+      var resp = await this._get({ endpoint: endpoint })
+      return JSON.parse(resp.body).data
+    } catch (e) {
+      throw new Error(e.message)
+    }
+
+  }
+
+  async getUserSaved({ username = '', after = '', before = '', sort = 'new', limit = 25 } = {}) {
+    log('::getUserSaved()')
+    try {
+
+      if (!username) {
+        let me = await this.me()
+        username = me.name
+      }
+      let endpoint = `/user/${username}/saved?after=${after}&before=${before}&sort=${sort}&limit=${limit}`
+      var resp = await this._get({ endpoint: endpoint })
+      return JSON.parse(resp.body).data
+    } catch (e) {
+      throw new Error(e.message)
+    }
+
+  }
+
+
 
   async updatePost(thing_id, text) {
     try {
@@ -968,6 +1020,17 @@ class Selig {
       throw new Error(e.message)
     }
 
+  }
+
+  async deletePost(thing_id) {
+    log(`deleting ${thing_id}`)
+    try {
+      let endpoint = `api/del`
+      var form = { id: thing_id }
+      return await this._post({ path: endpoint, form: form })
+    } catch (e) {
+      throw new Error(e.message)
+    }
   }
 
 

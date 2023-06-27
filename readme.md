@@ -120,6 +120,13 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 ## API
 ---
 
+### Properties
+* `.currentUser` - currently logged in username
+* `.cache` - path to primary storage location
+* `.currentUserFile` - path to current user's session file
+* `.home` - path to store all user session files
+
+### Methods
 * `async .me()` - returns the active account's profile data
 * `async .karma()` - returns the active account's karma breakdown
 * `async .trophies()` - returns the active account's trophy list
@@ -138,6 +145,7 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 * `async updatePost(thing_id, text)` - update the contents of a post/comment 
 
 
+
 ## Examples
 ---
 
@@ -148,15 +156,16 @@ This will return a JSON value similar to the one below. I have remove plenty of 
 ## Roadmap
 ---
 
-The plan is to add as mant API endpoints as possible but the following are the current items in priority.
+The plan is to add as mant API endpoints as possible but the following are the current items in priority but not in order.
 
 - [ ] Logout
 - [x] Subreddit's list
 - [ ] Commenting
-- [ ] Deleting Posts/Comments
+- [x] Deleting Posts/Comments
 - [ ] Mark/Unmark NSFW
 - [x] Inbox Messages, read/delete
 - [x] Mark subreddit as favorite
+- [x] Update Posts/Comments
 
 
 ![](https://lynks.cc/gh-selig/track)
